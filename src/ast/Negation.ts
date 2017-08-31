@@ -4,11 +4,12 @@ import { State } from '../interpreter/State';
 /**
   Representación de las negaciones de expresiones booleanas.
 */
-export class Negation implements Exp {
+export class Negation extends Exp {
 
   exp: Exp;
 
   constructor(exp: Exp) {
+    super();
     this.exp = exp;
   }
 
@@ -21,6 +22,6 @@ export class Negation implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return !this.exp.evaluateBoolean(state);
   }
 }

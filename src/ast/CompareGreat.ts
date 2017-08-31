@@ -4,12 +4,13 @@ import { State } from '../interpreter/State';
 /**
   Representación de las comparaciones por menor o igual.
 */
-export class CompareGreat implements Exp {
+export class CompareGreat extends Exp {
 
   lhs: Exp;
   rhs: Exp;
 
   constructor(lhs: Exp, rhs: Exp) {
+    super();
     this.lhs = lhs;
     this.rhs = rhs;
   }
@@ -23,6 +24,6 @@ export class CompareGreat implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return this.lhs.evaluateNumber(state) > this.rhs.evaluateNumber(state);
   }
 }

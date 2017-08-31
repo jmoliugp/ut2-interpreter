@@ -9,9 +9,19 @@ export interface ASTNode {
   Categoría sintáctica de las expresiones de While, las
   construcciones del lenguaje que evalúan a un valor.
 */
-export interface Exp extends ASTNode {
+export abstract class Exp implements ASTNode {
 
-  evaluate(state: State): any;
+  abstract toString(): string;
+  abstract unparse(): string;
+  abstract evaluate(state: State): any;
+
+  evaluateNumber(state: State): number{
+    return this.evaluate(state);
+  }
+  evaluateBoolean(state: State): boolean{
+    return this.evaluate(state);
+  }
+
 
 }
 

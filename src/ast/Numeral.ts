@@ -4,11 +4,12 @@ import { State } from '../interpreter/State';
 /**
   Representación de constantes numéricas o numerales.
 */
-export class Numeral implements Exp {
+export class Numeral extends Exp {
 
   value: number;
 
   constructor(value: number) {
+    super();
     this.value = value;
   }
 
@@ -21,6 +22,6 @@ export class Numeral implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return this.value;
   }
 }

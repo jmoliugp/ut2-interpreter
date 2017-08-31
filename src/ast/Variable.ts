@@ -4,10 +4,11 @@ import { State } from '../interpreter/State';
 /**
   Representación de usos de variable en expresiones.
 */
-export class Variable implements Exp {
+export class Variable extends Exp {
   id: string;
 
   constructor(id: string) {
+    super();
     this.id = id;
   }
 
@@ -20,6 +21,6 @@ export class Variable implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return state.get(this.id);
   }
 }

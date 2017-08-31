@@ -4,12 +4,13 @@ import { State } from '../interpreter/State';
 /**
   Representación de conjunciones booleanas (AND).
 */
-export class Conjunction implements Exp {
+export class Conjunction extends Exp {
 
   lhs: Exp;
   rhs: Exp;
 
   constructor(lhs: Exp, rhs: Exp) {
+    super();
     this.lhs = lhs;
     this.rhs = rhs;
   }
@@ -23,6 +24,6 @@ export class Conjunction implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return this.lhs.evaluateBoolean(state) && this.rhs.evaluateBoolean(state);
   }
 }

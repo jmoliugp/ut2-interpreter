@@ -4,11 +4,12 @@ import { State } from '../interpreter/State';
 /**
   Representación de valores de verdad (cierto o falso).
 */
-export class TruthValue implements Exp {
+export class TruthValue extends Exp {
 
   value: boolean;
 
   constructor(value: boolean) {
+    super();
     this.value = value;
   }
 
@@ -21,6 +22,6 @@ export class TruthValue implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    return this.value;
   }
 }
