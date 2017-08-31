@@ -23,7 +23,8 @@ import {
   Substraction,
   TruthValue,
   Variable,
-  WhileDo
+  WhileDo,
+  ExpCond
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -52,6 +53,10 @@ stmtelse ->
 # Expressions
 
 exp ->
+    exp "if" exp "else" exp {% ([exp, ,cond, ,expElse]) => (new ExpCond(cond, exp, expElse)) %}
+  | condisj                 {% id %}
+
+condisj ->
     exp "&&" comp           {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
   | exp "||" comp           {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
   | comp                    {% id %}
