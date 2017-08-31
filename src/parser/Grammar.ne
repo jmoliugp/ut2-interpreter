@@ -85,6 +85,7 @@ value ->
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}
+  | string                  {% ([id] => (new TextLiteral(id)))%}
 
 
 # Atoms
@@ -96,3 +97,6 @@ number ->
     %integer                {% ([id]) => (id.value) %}
   | %hex                    {% ([id]) => (id.value) %}
   | %float                  {% ([id]) => (id.value) %}
+
+string ->
+   %string                  {% ([id]) => (id.value) %}
