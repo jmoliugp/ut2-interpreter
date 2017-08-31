@@ -16,6 +16,8 @@ export * from './Numeral';
 export * from './Substraction';
 export * from './Variable';
 export * from './ExpCond';
+export * from './Length';
+export * from './TextLiteral';
 
 // BExp
 export * from './CompareEqual';

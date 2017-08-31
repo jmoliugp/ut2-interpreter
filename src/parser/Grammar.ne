@@ -24,7 +24,9 @@ import {
   TruthValue,
   Variable,
   WhileDo,
-  ExpCond
+  ExpCond,
+  TextLiteral,
+  Length
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -54,6 +56,7 @@ stmtelse ->
 
 exp ->
     exp "if" exp "else" exp {% ([exp, ,cond, ,expElse]) => (new ExpCond(cond, exp, expElse)) %}
+  | "length" "(" exp ")"    {% ([, , exp, ]) => (new Length(exp)) %}
   | condisj                 {% id %}
 
 condisj ->
@@ -90,7 +93,7 @@ value ->
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}
-  | string                  {% ([id] => (new TextLiteral(id)))%}
+  | string                  {% ([id]) => (new TextLiteral(id)) %}
 
 
 # Atoms
