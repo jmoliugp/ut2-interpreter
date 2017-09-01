@@ -24,7 +24,9 @@ import {
   TruthValue,
   Variable,
   WhileDo,
-  ExpCond
+  ExpCond,
+  TextLiteral,
+  Index
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -54,6 +56,7 @@ stmtelse ->
 
 exp ->
     exp "if" exp "else" exp {% ([exp, ,cond, ,expElse]) => (new ExpCond(cond, exp, expElse)) %}
+  | exp "[" exp "]"         {% ([exp, ,index, ]) => (new Index()) %}
   | condisj                 {% id %}
 
 condisj ->
