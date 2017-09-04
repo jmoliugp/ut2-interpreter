@@ -26,7 +26,8 @@ import {
   WhileDo,
   ExpCond,
   TextLiteral,
-  Length
+  Length,
+  Index
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -57,6 +58,7 @@ stmtelse ->
 exp ->
     exp "if" exp "else" exp {% ([exp, ,cond, ,expElse]) => (new ExpCond(cond, exp, expElse)) %}
   | "length" "(" exp ")"    {% ([, , exp, ]) => (new Length(exp)) %}
+  | exp "[" exp "]"         {% ([str, ,ind, ]) => (new Index(str,ind)) %}
   | condisj                 {% id %}
 
 condisj ->
