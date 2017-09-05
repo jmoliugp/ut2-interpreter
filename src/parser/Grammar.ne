@@ -27,7 +27,9 @@ import {
   ExpCond,
   TextLiteral,
   Length,
-  Index
+  Index,
+  DoWhile,
+  WhileDoElse
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -50,6 +52,8 @@ stmtelse ->
     identifier "=" exp ";"                {% ([id, , exp, ]) => (new Assignment(id, exp)) %}
   | "{" stmt:* "}"                        {% ([, statements, ]) => (new Sequence(statements)) %}
   | "while" exp "do" stmt                 {% ([, cond, , body]) => (new WhileDo(cond, body)) %}
+  | "do" stmt "while" exp                 {% ([, body, , cond]) => (new DoWhile(cond, body)) %}
+  | "while" exp "do" stmt "else" stmt     {% ([, cond, , body, , elseBody]) => (new WhileDoElse(cond,body,elseBody)) %}
   | "if" exp "then" stmtelse "else" stmt  {% ([, cond, , thenBody, , elseBody]) => (new IfThenElse(cond, thenBody, elseBody)) %}
 
 
@@ -91,7 +95,7 @@ neg ->
 
 value ->
     "(" exp ")"             {% ([, exp, ]) => (exp) %}
-  | number                  {% ([num]) => (new Numeral(num)) %}
+  | number                  {% ([num]) => (new Numeral(+num)) %}
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}

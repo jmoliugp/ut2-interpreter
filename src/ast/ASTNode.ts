@@ -22,6 +22,7 @@ export abstract class Exp implements ASTNode {
     }
     else { throw "Type error"; }
   }
+
   evaluateBoolean(state: State): boolean{
     var e = this.evaluate(state);
     if (typeof e == 'boolean'){
@@ -29,6 +30,7 @@ export abstract class Exp implements ASTNode {
     }
     else { throw "Type error"; }
   }
+
   evaluateString(state: State): string{
     var e = this.evaluate(state);
     if (typeof e == 'string'){
@@ -36,7 +38,6 @@ export abstract class Exp implements ASTNode {
     }
     else { throw "Type error"; }
   }
-
 }
 
 /**

@@ -24,6 +24,14 @@ export class Multiplication extends Exp {
   }
 
   evaluate(state: State): any {
-    return this.lhs.evaluateNumber(state) * this.evaluateNumber(state);
+    var l = this.lhs.evaluate(state);
+    var r = this.rhs.evaluate(state);
+    if(typeof l == 'string' && typeof r == 'number'){
+      return l.repeat(r);
+    } else{
+      if(typeof r == 'string' && typeof l == 'number'){
+        return r.repeat(l);
+      } else { throw "Type error" }
+    }
   }
 }

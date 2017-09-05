@@ -24,7 +24,12 @@ export class Addition extends Exp {
   }
 
   evaluate(state: State): any {
-    return this.lhs.evaluateNumber(state) + this.rhs.evaluateNumber(state);
+    var l = this.lhs.evaluate(state);
+    var r = this.rhs.evaluate(state);
+    if ((typeof l != 'boolean') && (typeof r != 'boolean')){
+      return l + r;
+    }
+    else{ throw "Type error"; }
   }
 
 }
