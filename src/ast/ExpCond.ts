@@ -1,4 +1,4 @@
-import { Exp, Stmt } from './ASTNode';
+import { Exp } from './ASTNode';
 import { State } from '../interpreter/State';
 
 /**
