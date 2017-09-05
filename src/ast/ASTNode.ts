@@ -16,12 +16,26 @@ export abstract class Exp implements ASTNode {
   abstract evaluate(state: State): any;
 
   evaluateNumber(state: State): number{
-    return this.evaluate(state);
+    var e = this.evaluate(state);
+    if (typeof e == 'number'){
+      return this.evaluate(state);
+    }
+    else { throw "Type error"; }
   }
   evaluateBoolean(state: State): boolean{
-    return this.evaluate(state);
+    var e = this.evaluate(state);
+    if (typeof e == 'boolean'){
+      return this.evaluate(state);
+    }
+    else { throw "Type error"; }
   }
-
+  evaluateString(state: State): string{
+    var e = this.evaluate(state);
+    if (typeof e == 'string'){
+      return this.evaluate(state);
+    }
+    else { throw "Type error"; }
+  }
 
 }
 

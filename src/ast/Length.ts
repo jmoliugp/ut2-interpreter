@@ -22,6 +22,6 @@ export class Length extends Exp {
   }
 
   evaluate(state: State): any {
-    return this.str.evaluate(state).length;
+    return this.str.evaluateString(state).length;
   }
 }
