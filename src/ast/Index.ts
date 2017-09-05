@@ -2,28 +2,29 @@ import { Exp } from './ASTNode';
 import { State } from '../interpreter/State';
 
 /**
-  Representación de las indizaciones de un literal de texto.
+  Representación de sumas.
 */
 export class Index extends Exp {
 
-  expStr: Exp;
-  expIndex: Exp;
+  str: Exp;
+  ind: Exp;
 
-  constructor(expStr: Exp, expIndex: Exp) {
+  constructor(str: Exp, ind: Exp) {
     super();
-    this.expStr = expStr;
-    this.expIndex = expIndex;
+    this.str = str;
+    this.ind = ind;
   }
 
   toString(): string {
-    return `Index(${this.expStr},${this.expIndex})`;
+    return `Index(${this.str.toString()}, ${this.ind.toString()})`;
   }
 
   unparse(): string {
-    return `(${this.expStr.unparse()}[${this.expIndex.unparse()}])`;
+    return `(${this.str.unparse()}[${this.ind.unparse()}])`;
   }
 
   evaluate(state: State): any {
-    return this.expStr.evaluate(state)[this.expIndex.evaluate(state)];
+    return this.str.evaluate(state)[this.ind.evaluateNumber(state)];
   }
+
 }
